@@ -1,0 +1,67 @@
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .form-title {
+        background-color: #114305;
+        text-align: center;
+        font-weight: bold;
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 8px;
+    }
+
+    form {
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #4caf50;
+        color: #ffffff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<form method="POST">
+    <div class="form-title">
+        <h3>Login</h3>
+    </div>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Login</button>
+</form>

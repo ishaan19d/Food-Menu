@@ -1,0 +1,44 @@
+{% extends 'food/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+    <style>
+        .NoItem {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8d7da; /* Light red background for emphasis */
+            border: 1px solid #f5c6cb; /* Red border for emphasis */
+            border-radius: 5px; /* Rounded corners for emphasis */
+        }
+    </style>
+</head>
+<body>
+    {% block body %}
+    {% if item_list %}
+        {% for item in item_list %}
+        <div class="row">
+            <div class="col-md-3 offset-md-2">
+                <img class="card" height="200px" width="200px" src="{{item.item_image}}">
+            </div>
+            <div class="col-md-4">
+                <h3>{{ item.item_name }}</h3>
+                <h5>{{ item.item_desc }}</h5>
+                <h6>Rs. {{ item.item_price }}</h6>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'food:detail' item.id %}" class="btn btn-success">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="NoItem">
+            <h5 style="text-align: center;">No food items available.</h5>
+        </div>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

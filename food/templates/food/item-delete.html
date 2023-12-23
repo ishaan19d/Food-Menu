@@ -1,0 +1,43 @@
+<style>
+    form {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    button[type="button"] {
+        background-color: #ccc;
+        color: #333;
+    }
+</style>
+
+<form method="POST" id="deleteForm">
+    {% csrf_token %}
+    <h2>Are you sure you want to delete {{ item.item_name }}</h2>
+    <button type="submit">Confirm</button>
+    <button type="button" onclick="cancelDelete()">Cancel</button>
+</form>
+
+<script>
+    function cancelDelete() {
+        // Redirect to the specified URL
+        window.location.href = '{% url "food:index" %}';
+    }
+</script>
+
