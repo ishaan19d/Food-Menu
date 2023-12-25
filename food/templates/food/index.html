@@ -10,14 +10,20 @@
             text-align: center;
             margin-top: 20px;
             padding: 10px;
-            background-color: #f8d7da; /* Light red background for emphasis */
-            border: 1px solid #f5c6cb; /* Red border for emphasis */
-            border-radius: 5px; /* Rounded corners for emphasis */
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     {% block body %}
+    <div class="SearchBar">
+        <form action="" method="GET">
+            <input type="search" name="name" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
     {% if item_list %}
         {% for item in item_list %}
         <div class="row">
@@ -34,6 +40,19 @@
             </div>
         </div>
         {% endfor %}
+        <div class="paginator">
+            {% if item_list.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ item_list.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            Page:{{ item_list.number }} of {{ item_list.paginator.num_pages }}
+
+            {% if item_list.has_next %}
+                <a href="?page={{ item_list.next_page_number }}">Next</a>
+                <a href="?page={{ item_list.paginatior.num_pages }}">Last</a>
+            {% endif %}
+        </div>
     {% else %}
         <div class="NoItem">
             <h5 style="text-align: center;">No food items available.</h5>

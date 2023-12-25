@@ -6,11 +6,19 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 # Create your views here.
-class IndexClassView(ListView):
-    model=Item
-    template_name='food/index.html'
-    context_object_name='item_list'
+def index(request):
+    item_list = Item.objects.all()
+
+    name=request.GET.get('name')
+    if name!='' and name is not None:
+        item_list=item_list.filter(item_name__icontains=name)
+
+    paginator=Paginator(item_list,5)
+    page=request.GET.get('page')
+    item_list=paginator.get_page(page)
+    return render(request, 'food/index.html', {'item_list': item_list})
 
 class FoodDetail(DetailView):
     model=Item
